@@ -1,0 +1,18 @@
+# Backend dependencies
+Backend/node_modules/
+
+# Frontend dependencies
+vite-project/node_modules/
+
+# Build files
+vite-project/dist/
+Backend/dist/
+
+# Environment files (VERY important)
+Backend/.env
+vite-project/.env
+
+# System / Editor files
+.vscode/
+.DS_Store
+Thumbs.db
