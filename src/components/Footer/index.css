@@ -1,0 +1,126 @@
+/* FOOTER SECTION */
+.footer-section {
+  background: linear-gradient(180deg, #0a0a1f, #101026);
+  padding: 60px 80px 20px;
+  color: #dcdcdc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-top: 4rem; */
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  gap: 40px;
+}
+
+/* Brand */
+.footer-brand h2 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.footer-brand p {
+  color: #bbb;
+  font-size: 0.95rem;
+  max-width: 250px;
+}
+
+.social-icons {
+  margin-top: 15px;
+}
+
+.social-icons a {
+  color: #fff;
+  margin-right: 15px;
+  font-size: 1.5rem;
+  transition: 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #ff7ae6;
+  transform: scale(1.2);
+}
+
+/* Links */
+.footer-links h4 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin: 10px 0;
+}
+
+.footer-links a {
+  color: #bbb;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #ff7ae6;
+}
+
+/* Newsletter */
+.footer-newsletter h4 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.footer-newsletter p {
+  color: #bbb;
+  margin-bottom: 15px;
+}
+
+.footer-newsletter form {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-newsletter input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background-color: #1c1c38;
+  color: #fff;
+}
+
+.footer-newsletter button {
+  background: linear-gradient(90deg, #9b5de5, #f15bb5);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer-newsletter button:hover {
+  opacity: 0.8;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #222;
+  padding-top: 20px;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #aaa;
+}
