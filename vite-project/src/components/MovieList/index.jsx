@@ -53,17 +53,18 @@ function MovieList() {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
+  const BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
 
   useEffect(() => {
     if (!mood) return;
-    fetch(`http://localhost:5000/api/movies?mood=${mood}`)
+    fetch(`${BASE}/api/movies?mood=${mood}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched movies:", data);
         setMovies(data);
       })
       .catch((err) => console.error("❌ Fetch error:", err));
-  }, [mood]);
+  }, [mood, BASE]);
 
   // ✅ FILTER MOVIES HERE
   const filteredMovies = movies.filter(movie =>
