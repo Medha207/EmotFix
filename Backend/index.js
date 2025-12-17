@@ -9,12 +9,24 @@ import reviewrouter from "./routes/reviewRoutes.js";
 
 dotenv.config();
 const app = express();
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://emot-fix.vercel.app"
+];
+
 app.use(cors({
-  origin: "http://localhost:5173", // vite dev server
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed"));
+    }
+  },
   credentials: true,
-   methods: "GET,PUT,POST,DELETE"
+  methods: "GET,PUT,POST,DELETE"
 }));
-// app.use(cors({ origin: "*", credentials: false, methods: "GET,PUT,POST,DELETE" }));
 
 app.use(express.json());
 app.use('/api/movies', router);
