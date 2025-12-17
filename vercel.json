@@ -1,7 +1,6 @@
 {
-  "buildCommand": "npm --prefix vite-project install && npm --prefix vite-project run build",
+  "buildCommand": "cd vite-project && npm install && npm run build",
   "outputDirectory": "vite-project/dist",
-  "env": {
-    "VITE_API_BASE": "https://emotfix-2.onrender.com"
-  }
+  "installCommand": "cd vite-project && npm install"
 }
+
