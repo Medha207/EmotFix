@@ -1,68 +1,96 @@
-import React from 'react'
-import "./index.css"
-import { useState } from "react";
-import axios from "axios";
-
-const BASE_URL = `${import.meta.env.VITE_API_BASE || "http://localhost:5000"}/api/users`;
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import './index.css';
 
 function SignUp() {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+        if (username.trim()) {
+            localStorage.setItem('username', username);
+            navigate('/');
+        }
+    };
 
-  const user = (event)=>{
-    setUsername(event.target.value);
-  }
+    return (
+        <div className="auth-page">
+            <div className="auth-container">
+                <div className="auth-card">
+                    <h1 className="auth-title">Join EmotFix!</h1>
+                    <p className="auth-subtitle">Create an account to start your journey</p>
 
-  const emailId = (event)=>{
-    setEmail(event.target.value);
-  }
+                    <form onSubmit={handleSubmit} className="auth-form">
+                        <div className="form-group">
+                            <label htmlFor="username">Username</label>
+                            <input
+                                type="text"
+                                id="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Choose a username"
+                                required
+                            />
+                        </div>
 
-  const pass = (event)=>{
-    setPassword(event.target.value);
-  }
+                        <div className="form-group">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
+                                required
+                            />
+                        </div>
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post(`${BASE_URL}/register`, {
-        username,
-        email,
-        password,
-      });
-      setMessage("✅ Registered successfully! Please login.");
-      setUsername("");
-      setEmail("");
-      setPassword("");
-    } catch (err) {
-  console.error("🔴 Registration error:", err.response?.data);
-  setMessage(`❌ ${err.response?.data?.error || err.message || "Registration failed. Try again."}`);
-    }
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Create a password"
+                                required
+                            />
+                        </div>
 
-  };
+                        <div className="form-group">
+                            <label htmlFor="confirmPassword">Confirm Password</label>
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                placeholder="Confirm your password"
+                                required
+                            />
+                        </div>
 
-  return (
-  <div className='signupContainer'>
-    <div className='box'>
-        <h1 className='heading'>SignUp</h1>
-        <p className="p">Username</p>
-        <input type = "text" value={username} onChange={user} placeholder='username'></input>
-        <p className='p'>Email</p>
-        <input type = "email"  value={email}
-            onChange={emailId} placeholder='email'></input>
-        <p className='p'>Password</p>
-        <input type = "password" value={password}
-            onChange={pass} placeholder='password'></input>
-        <button className='btn' onClick={handleRegister}>SignUp</button>
-        {message && <p className='message'>{message}</p>}
-        <p className='p'>Already have an account? <a href="/signin"><span>SignIn</span></a></p>
-        
-    </div>
-     </div>
+                        <button type="submit" className="auth-btn">
+                            Sign Up
+                        </button>
+                    </form>
 
-  )
+                    <p className="auth-footer">
+                        Already have an account? <Link to="/signin">Sign In</Link>
+                    </p>
+
+                    <Link to="/" className="back-link">← Back to Home</Link>
+                </div>
+            </div>
+        </div>
+    );
 }
 
-export default SignUp
+export default SignUp;

@@ -1,13 +1,14 @@
-import React from 'react'
-import "./index.css"
+import React from 'react';
+import './index.css';
 
 function SadMood() {
-  return (
-    <div className='container-1'>
-        <img className='image' src = "https://emojiisland.com/cdn/shop/products/Sad_Face_Emoji_large.png?v=1571606037"/>
-        <p className='paragraph'>Sad</p>
-    </div>
-  )
+    return (
+        <div className="mood-button sad-mood">
+            <div className="mood-emoji">😢</div>
+            <h3>Sad</h3>
+            <p>Emotional dramas</p>
+        </div>
+    );
 }
 
-export default SadMood
+export default SadMood;

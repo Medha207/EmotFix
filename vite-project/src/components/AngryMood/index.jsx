@@ -1,18 +1,14 @@
-import React from 'react'
-import "./index.css"
+import React from 'react';
+import './index.css';
 
 function AngryMood() {
-  return (
-    <div className='container-2'>
-        <span className='emoji'>
-          <img  className="image" src="https://emojiisland.com/cdn/shop/products/Angry_Emoji_1024x1024.png?v=1571606038"/>
-        </span>
-        <p className='paragraph'>Angry</p>
- 
-
-
-    </div>
-  )
+    return (
+        <div className="mood-button angry-mood">
+            <div className="mood-emoji">😠</div>
+            <h3>Angry</h3>
+            <p>Action thrillers</p>
+        </div>
+    );
 }
 
-export default AngryMood
+export default AngryMood;

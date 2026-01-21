@@ -24,6 +24,12 @@
   display: flex;
   justify-content: space-between;
   font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.faq-question:hover {
+  color: #ff7ae6;
 }
 
 .faq-answer {

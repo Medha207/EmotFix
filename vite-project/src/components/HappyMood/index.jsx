@@ -1,16 +1,14 @@
-import React from 'react'
-import "./index.css"
+import React from 'react';
+import './index.css';
 
 function HappyMood() {
-  return (
-    <div className='container'>
-        <img  className="image" src="https://emojiisland.com/cdn/shop/products/Emoji_Icon_-_Smiling_medium.png?v=1571606089" alt="happy"/>
-        <p className='paragraph'>Happy</p>
- 
-
-
-    </div>
-  )
+    return (
+        <div className="mood-button happy-mood">
+            <div className="mood-emoji">😊</div>
+            <h3>Happy</h3>
+            <p>Feel-good movies</p>
+        </div>
+    );
 }
 
-export default HappyMood
+export default HappyMood;
