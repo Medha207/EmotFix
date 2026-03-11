@@ -195,6 +195,44 @@ function Dashboard() {
                         </Link>
                     </div>
                 </section>
+
+                {/* Trending Movies Section */}
+                <section className="dashboard-section">
+                    <h2 className="section-title">
+                        <span className="section-icon">🔥</span>
+                        Featured Picks
+                    </h2>
+
+                    <div className="featured-grid">
+                        <div className="featured-card">
+                            <div className="featured-badge">Trending</div>
+                            <img src="https://via.placeholder.com/400x600?text=Featured+Movie+1" alt="Featured Movie" />
+                            <div className="featured-info">
+                                <h3>Latest Releases</h3>
+                                <p className="featured-desc">Discover the hottest new movies this month</p>
+                                <Link to="/movies/thrilled" className="featured-link">Explore →</Link>
+                            </div>
+                        </div>
+                        <div className="featured-card">
+                            <div className="featured-badge">Top Rated</div>
+                            <img src="https://via.placeholder.com/400x600?text=Featured+Movie+2" alt="Featured Movie" />
+                            <div className="featured-info">
+                                <h3>Viewer Favorites</h3>
+                                <p className="featured-desc">Highly rated movies loved by our community</p>
+                                <Link to="/movies/happy" className="featured-link">Watch Now →</Link>
+                            </div>
+                        </div>
+                        <div className="featured-card">
+                            <div className="featured-badge">Hidden Gem</div>
+                            <img src="https://via.placeholder.com/400x600?text=Featured+Movie+3" alt="Featured Movie" />
+                            <div className="featured-info">
+                                <h3>Underrated Classics</h3>
+                                <p className="featured-desc">Unique films that deserve more attention</p>
+                                <Link to="/movies/sad" className="featured-link">Browse →</Link>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     );

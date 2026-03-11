@@ -32,6 +32,8 @@ export default function MovieDetails() {
         const res = await fetch(`${BASE}/api/movies/${id}`);
         if (!res.ok) throw new Error("Failed to fetch movie");
         const data = await res.json();
+        console.log("📺 Movie loaded:", data);
+        console.log("🎬 Trailer URL:", data.trailerUrl);
         setMovie(data);
       } catch (err) {
         console.error("❌ Movie fetch error:", err);
@@ -79,11 +81,12 @@ export default function MovieDetails() {
     };
 
     try {
-      const res = await fetch(`${BASE}/api/reviews`, {
+      const res = await fetch(`${BASE}/api/reviews/${id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reviewData),
       });
+      if (!res.ok) throw new Error("Failed to add review");
       const savedReview = await res.json();
       setReviews([...reviews, savedReview]);
       setNewReview("");
@@ -110,6 +113,18 @@ export default function MovieDetails() {
       localStorage.setItem(`watchlist_${username}`, JSON.stringify(watchlist));
       setIsInWatchlist(true);
     }
+  };
+
+  const getEmbedUrl = (url) => {
+    if (!url) return '';
+    if (url.includes('/embed/')) return url;
+    let videoId = '';
+    if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1]?.split('?')[0];
+    } else if (url.includes('v=')) {
+      videoId = url.split('v=')[1]?.split('&')[0];
+    }
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
   };
 
   if (!movie) return (
@@ -195,20 +210,41 @@ export default function MovieDetails() {
               ✕
             </button>
             <div className="player-wrapper">
-              <ReactPlayer
-                url={movie.trailerUrl}
-                controls
-                width="100%"
-                height="100%"
-                playing={false}
-                config={{
-                  youtube: {
-                    playerVars: { showinfo: 1 }
-                  }
-                }}
-                onError={(e) => console.error('Video playback error:', e)}
-              />
+              {movie.trailerUrl ? (
+                <div className="trailer-content">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={getEmbedUrl(movie.trailerUrl)}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title="Movie Trailer"
+                  />
+                  <p className="trailer-url-display">
+                    <strong>Trailer Link:</strong> <a href={movie.trailerUrl} target="_blank" rel="noopener noreferrer">{movie.trailerUrl}</a>
+                  </p>
+                </div>
+              ) : (
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                  color: 'white',
+                  fontSize: '1.2rem'
+                }}>
+                  <p>Trailer not available for this movie</p>
+                </div>
+              )}
             </div>
+            <button 
+              className="btn-back-to-movies" 
+              onClick={() => setShowTrailer(false)}
+            >
+              <span className="btn-icon">←</span>
+              Back to Movie Details
+            </button>
           </div>
         </div>
       )}

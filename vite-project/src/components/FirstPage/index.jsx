@@ -72,7 +72,7 @@ function FirstPage() {
             </div>
 
             {/* Mood Selection */}
-            <div className='mood-container'>
+            <div className='mood-container' id="moods">
                 <div className="mood-card" onClick={() => navigate("/movies/happy")}>
                     <HappyMood />
                 </div>

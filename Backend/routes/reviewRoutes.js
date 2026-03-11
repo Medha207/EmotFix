@@ -7,6 +7,6 @@ const reviewrouter = express.Router();
 reviewrouter.get("/:movieId", getReviewsByMovie);
 
 // POST a new review
-reviewrouter.post("/", addReview);
+reviewrouter.post("/:movieId", addReview);
 
 export default reviewrouter;

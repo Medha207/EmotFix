@@ -224,17 +224,19 @@
   position: relative;
   width: 100%;
   max-width: 1200px;
-  aspect-ratio: 16/9;
+  max-height: 85vh;
   background: #000;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-close {
   position: absolute;
-  top: -50px;
-  right: 0;
+  top: 20px;
+  right: 20px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
@@ -245,6 +247,9 @@
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-close:hover {
@@ -254,7 +259,98 @@
 
 .player-wrapper {
   width: 100%;
+  aspect-ratio: 16/9;
+  position: relative;
+  background: #000;
+}
+
+.trailer-content {
+  width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.trailer-content iframe {
+  flex: 1;
+  border: none;
+}
+
+.trailer-url-display {
+  background: rgba(139, 92, 246, 0.1);
+  border-top: 1px solid rgba(139, 92, 246, 0.3);
+  color: #d4d4d8;
+  padding: 1rem;
+  margin: 0;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.trailer-url-display a {
+  color: #8b5cf6;
+  text-decoration: none;
+  word-break: break-all;
+  transition: color 0.3s ease;
+}
+
+.trailer-url-display a:hover {
+  color: #a78bfa;
+  text-decoration: underline;
+}
+
+.no-trailer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #d4d4d8;
+  font-size: 1.2rem;
+}
+
+.btn-back-to-movies {
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  margin-top: 2rem;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-back-to-movies {
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  margin-top: 2rem;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-back-to-movies:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+}
+
+.btn-back-to-movies .btn-icon {
+  font-size: 1.2rem;
 }
 
 /* Reviews Section */
@@ -476,6 +572,10 @@
   }
 
   .modal-content {
+    max-height: 90vh;
+  }
+
+  .player-wrapper {
     aspect-ratio: 16/10;
   }
 

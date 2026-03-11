@@ -15,7 +15,8 @@ export async function getReviewsByMovie(req, res){
 //  Add a new review
 export async function  addReview(req, res){
   try {
-    const { movieId, author, reviewText } = req.body;
+    const { movieId } = req.params;
+    const { author, reviewText } = req.body;
 
     if (!movieId || !reviewText) {
       return res.status(400).json({ message: "Movie ID and review text are required" });

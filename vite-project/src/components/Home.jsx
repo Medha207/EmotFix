@@ -4,7 +4,6 @@ import Navbar from './Navbar'
 import FAQ from './FAQ'
 import Footer from './Footer'
 import ChatBot from './chatbot'
-import ReviewsSection from './ReviewSection'
 
 function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,7 +18,6 @@ function Home() {
       <Navbar />
       <FirstPage />
       <FAQ />
-      {isAuthenticated && <ReviewsSection />}
       <Footer />
       <ChatBot />
     </div>

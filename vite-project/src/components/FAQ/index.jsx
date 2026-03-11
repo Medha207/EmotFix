@@ -14,16 +14,34 @@ const FAQ = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  const handleKeyDown = (e, index) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleFAQ(index);
+    }
+  };
+
   return (
-    <section className="faq-section">
+    <section className="faq-section" id="faq">
       <h2 className="faq-title">Frequently Asked Questions</h2>
       {faqs.map((faq, index) => (
         <div key={index} className="faq-item">
-          <h3 className="faq-question" onClick={() => toggleFAQ(index)}>
+          <button 
+            className="faq-question" 
+            onClick={() => toggleFAQ(index)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+            aria-expanded={activeIndex === index}
+            aria-controls={`faq-answer-${index}`}
+          >
             {faq.question}
-            <span>{activeIndex === index ? "−" : "+"}</span>
-          </h3>
-          {activeIndex === index && <p className="faq-answer">{faq.answer}</p>}
+            <span className="faq-toggle">{activeIndex === index ? "−" : "+"}</span>
+          </button>
+          <div 
+            id={`faq-answer-${index}`}
+            className={`faq-answer ${activeIndex === index ? 'active' : ''}`}
+          >
+            {faq.answer}
+          </div>
         </div>
       ))}
     </section>
