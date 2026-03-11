@@ -55,7 +55,7 @@ function MovieList() {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
-  const BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
+  const BASE = import.meta.env.VITE_API_BASE || "https://emotfix-2.onrender.com";
 
   useEffect(() => {
     if (!mood) return;

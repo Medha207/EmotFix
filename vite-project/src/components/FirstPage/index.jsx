@@ -12,7 +12,7 @@ function FirstPage() {
     const [username, setUsername] = useState("");
     const [featuredMovies, setFeaturedMovies] = useState([]);
     const [trendingMovies, setTrendingMovies] = useState([]);
-    const BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
+    const BASE = import.meta.env.VITE_API_BASE || 'https://emotfix-2.onrender.com';
 
     useEffect(() => {
         const storedUser = localStorage.getItem("username");
