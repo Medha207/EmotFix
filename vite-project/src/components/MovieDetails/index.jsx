@@ -14,7 +14,9 @@ export default function MovieDetails() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [isInWatchlist, setIsInWatchlist] = useState(false);
-  const BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
+  const BASE = window.location.hostname === 'localhost' 
+      ? 'http://localhost:5000' 
+      : 'https://emotfix-2.onrender.com';
 
   // Check authentication
   useEffect(() => {
