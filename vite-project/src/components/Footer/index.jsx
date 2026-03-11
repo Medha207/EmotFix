@@ -27,7 +27,7 @@ const Footer = () => {
     }
 
     try {
-      const BASE = import.meta.env.VITE_API_BASE || 'https://emotfix-2.onrender.com';
+      const BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
       const res = await fetch(`${BASE}/api/misc/subscribe`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -61,7 +61,7 @@ const Footer = () => {
     }
 
     try {
-      const BASE = import.meta.env.VITE_API_BASE || 'https://emotfix-2.onrender.com';
+      const BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
       const res = await fetch(`${BASE}/api/misc/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
