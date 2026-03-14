@@ -2,6 +2,8 @@
   padding: 60px;
   color: white;
   background: rgba(20, 20, 40, 0.8);
+  position: relative;
+  z-index: 1;
 }
 
 .faq-title {
@@ -29,19 +31,13 @@
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  background: none;
-  border: none;
   color: white;
   width: 100%;
-  padding: 0;
   font-size: 1.1rem;
   text-align: left;
-  font-family: inherit;
 }
 
-.faq-question:hover {
+.faq-item:hover .faq-question {
   color: #ff7ae6;
 }
 

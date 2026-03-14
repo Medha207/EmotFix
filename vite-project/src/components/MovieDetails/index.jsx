@@ -14,9 +14,9 @@ export default function MovieDetails() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [isInWatchlist, setIsInWatchlist] = useState(false);
-  const BASE = window.location.hostname === 'localhost' 
-      ? 'http://localhost:5000' 
-      : 'https://emotfix-2.onrender.com';
+  // const BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
+  const BASE = import.meta.env.VITE_API_BASE || "https://emotfix-3.onrender.com";
+
 
   // Check authentication
   useEffect(() => {
@@ -117,18 +117,6 @@ export default function MovieDetails() {
     }
   };
 
-  const getEmbedUrl = (url) => {
-    if (!url) return '';
-    if (url.includes('/embed/')) return url;
-    let videoId = '';
-    if (url.includes('youtu.be/')) {
-      videoId = url.split('youtu.be/')[1]?.split('?')[0];
-    } else if (url.includes('v=')) {
-      videoId = url.split('v=')[1]?.split('&')[0];
-    }
-    return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
-  };
-
   if (!movie) return (
     <div className="loading-container">
       <Navbar />
@@ -217,7 +205,7 @@ export default function MovieDetails() {
                   <iframe
                     width="100%"
                     height="100%"
-                    src={getEmbedUrl(movie.trailerUrl)}
+                    src={`https://www.youtube.com/embed/${movie.trailerUrl.includes('youtu.be') ? movie.trailerUrl.split('/').pop() : movie.trailerUrl.split('v=')[1]?.split('&')[0]}`}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen

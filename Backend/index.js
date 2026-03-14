@@ -6,7 +6,6 @@ import cors from "cors";
 import router from "./routes/MovieRoutes.js";
 import route from "./routes/userRoutes.js";
 import reviewrouter from "./routes/reviewRoutes.js";
-import miscRoutes from "./routes/miscRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -14,6 +13,7 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
+  "http://localhost:5175",
   "http://localhost:3000",
   "https://emot-fix.vercel.app"
 ];
@@ -34,7 +34,6 @@ app.use(express.json());
 app.use('/api/movies', router);
 app.use('/api/users', route);
 app.use("/api/reviews", reviewrouter);
-app.use("/api/misc", miscRoutes);
 console.log(" Routes mounted at /api/movies");
 
 const mongo_URI = process.env.MongoDb_URI

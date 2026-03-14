@@ -1,31 +1,53 @@
 .chatbot-container {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999; /* Ensure it's on top of everything */
 }
 
 .chatbot-toggle {
+  background-color: #5c6aff; /* Use solid color instead of gradient if reported as transparent */
   background: #5c6aff;
-  border: none;
+  border: 3px solid #ffffff; /* Add thick white border for visibility */
   border-radius: 50%;
-  font-size: 1.8rem;
-  padding: 15px;
+  font-size: 2rem;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
   cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 1 !important;
+}
+
+.chatbot-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(92, 106, 255, 0.6);
 }
 
 .chatbot-box {
-  background: #1c1c3a;
-  width: 300px;
-  height: 400px;
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: #1a1a2e; /* Solid dark color */
+  width: 330px;
+  height: 480px;
+  border: 2px solid #5c6aff; /* Solid primary border */
+  border-radius: 20px;
+  box-shadow: 0 10px 50px rgba(0,0,0,0.9);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: absolute;
-  bottom: 70px;
+  bottom: 85px;
   right: 0;
+  animation: slideUp 0.3s ease;
+  opacity: 1 !important;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .chatbot-messages {

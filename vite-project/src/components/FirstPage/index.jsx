@@ -6,15 +6,18 @@ import SadMood from '../SadMood'
 import AngryMood from '../AngryMood'
 import ThrilledMood from '../ThrilledMood'
 import MovieCarousel from '../MovieCarousel'
+import FAQ from '../FAQ'
+import Footer from '../Footer'
+import ChatBot from '../chatbot'
 
 function FirstPage() {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [featuredMovies, setFeaturedMovies] = useState([]);
     const [trendingMovies, setTrendingMovies] = useState([]);
-    const BASE = window.location.hostname === 'localhost' 
-        ? 'http://localhost:5000' 
-        : 'https://emotfix-2.onrender.com';
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const BASE = import.meta.env.VITE_API_BASE || 'https://emotfix-3.onrender.com';
 
     useEffect(() => {
         const storedUser = localStorage.getItem("username");
@@ -24,22 +27,34 @@ function FirstPage() {
     // Fetch featured and trending movies
     useEffect(() => {
         async function fetchMovies() {
+            setLoading(true);
+            setError(null);
             try {
                 // Fetch happy movies for featured
                 const featuredRes = await fetch(`${BASE}/api/movies?mood=happy`);
+                let featuredData = [];
                 if (featuredRes.ok) {
-                    const data = await featuredRes.json();
-                    setFeaturedMovies(data.slice(0, 10));
+                    featuredData = await featuredRes.json();
                 }
 
                 // Fetch thrilled movies for trending
                 const trendingRes = await fetch(`${BASE}/api/movies?mood=thrilled`);
+                let trendingData = [];
                 if (trendingRes.ok) {
-                    const data = await trendingRes.json();
-                    setTrendingMovies(data.slice(0, 10));
+                    trendingData = await trendingRes.json();
+                }
+
+                setFeaturedMovies(featuredData.slice(0, 10));
+                setTrendingMovies(trendingData.slice(0, 10));
+                
+                if (featuredData.length === 0 && trendingData.length === 0) {
+                    console.warn("No movies fetched from backend");
                 }
             } catch (err) {
                 console.error('Error fetching movies:', err);
+                setError("Failed to load movies. Please check your connection.");
+            } finally {
+                setLoading(false);
             }
         }
         fetchMovies();
@@ -91,17 +106,33 @@ function FirstPage() {
 
             {/* Movie Carousels */}
             <div className="carousels-section">
-                <MovieCarousel
-                    title="🎉 Feel-Good Favorites"
-                    movies={featuredMovies}
-                    category="happy"
-                />
-                <MovieCarousel
-                    title="🔥 Trending Now"
-                    movies={trendingMovies}
-                    category="thrilled"
-                />
+                {loading && <div className="loading-spinner">Loading movies...</div>}
+                {error && <div className="error-message">{error}</div>}
+                
+                {!loading && featuredMovies.length > 0 && (
+                    <MovieCarousel
+                        title="🎉 Feel-Good Favorites"
+                        movies={featuredMovies}
+                        category="happy"
+                    />
+                )}
+                
+                {!loading && trendingMovies.length > 0 && (
+                    <MovieCarousel
+                        title="🔥 Trending Now"
+                        movies={trendingMovies}
+                        category="thrilled"
+                    />
+                )}
+
+                {!loading && featuredMovies.length === 0 && trendingMovies.length === 0 && !error && (
+                    <div className="no-movies-fallback">
+                        <h3>Discovering more movies for you...</h3>
+                    </div>
+                )}
             </div>
+
+            <FAQ />
         </div>
     )
 }

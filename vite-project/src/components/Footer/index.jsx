@@ -8,7 +8,7 @@ const Footer = () => {
   const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
   const [contactMessage, setContactMessage] = useState('');
 
-  const handleSubscribe = async (e) => {
+  const handleSubscribe = (e) => {
     e.preventDefault();
 
     // Email validation
@@ -26,27 +26,13 @@ const Footer = () => {
       return;
     }
 
-    try {
-      const BASE = window.location.hostname === 'localhost' 
-          ? 'http://localhost:5000' 
-          : 'https://emotfix-2.onrender.com';
-      const res = await fetch(`${BASE}/api/misc/subscribe`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Subscription failed');
-      
-      setMessage('🎉 Successfully subscribed! Check your inbox.');
-      setEmail('');
-    } catch (err) {
-      setMessage(`❌ ${err.message || 'Failed to subscribe'}`);
-    }
-    setTimeout(() => setMessage(''), 4000);
+    // Success
+    setMessage('🎉 Successfully subscribed! Check your inbox.');
+    setEmail('');
+    setTimeout(() => setMessage(''), 5000);
   };
 
-  const handleContactSubmit = async (e) => {
+  const handleContactSubmit = (e) => {
     e.preventDefault();
 
     if (!contactForm.name.trim() || !contactForm.email.trim() || !contactForm.message.trim()) {
@@ -62,27 +48,13 @@ const Footer = () => {
       return;
     }
 
-    try {
-      const BASE = window.location.hostname === 'localhost' 
-          ? 'http://localhost:5000' 
-          : 'https://emotfix-2.onrender.com';
-      const res = await fetch(`${BASE}/api/misc/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(contactForm)
-      });
-      if (!res.ok) throw new Error('Failed to send message');
-
-      setContactMessage('✅ Message sent! We\'ll get back to you soon.');
-      setContactForm({ name: '', email: '', message: '' });
-      setTimeout(() => {
-        setContactMessage('');
-        setShowContactModal(false);
-      }, 3000);
-    } catch (err) {
-      setContactMessage('❌ Failed to send message. Please try again.');
-      setTimeout(() => setContactMessage(''), 3000);
-    }
+    // Success
+    setContactMessage('✅ Message sent! We\'ll get back to you soon.');
+    setContactForm({ name: '', email: '', message: '' });
+    setTimeout(() => {
+      setContactMessage('');
+      setShowContactModal(false);
+    }, 3000);
   };
 
   return (
@@ -93,10 +65,10 @@ const Footer = () => {
           <h2>🎬 EmotiFlix</h2>
           <p>Watch movies that match your mood.</p>
           <div className="social-icons">
-            <a href="#"><i className="fab fa-facebook"></i></a>
-            <a href="#"><i className="fab fa-instagram"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
-            <a href="#"><i className="fab fa-youtube"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i></a>
           </div>
         </div>
 

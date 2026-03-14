@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
 
-function MovieCarousel({ title, movies, category }) {
+function MovieCarousel({ title, movies }) {
   const scrollRef = useRef(null);
   const navigate = useNavigate();
 

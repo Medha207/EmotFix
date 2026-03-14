@@ -55,19 +55,26 @@ function MovieList() {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
-  const BASE = window.location.hostname === 'localhost' 
-      ? 'http://localhost:5000' 
-      : 'https://emotfix-2.onrender.com';
+  // const BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
+    const BASE = import.meta.env.VITE_API_BASE || "https://emotfix-3.onrender.com";
 
   useEffect(() => {
     if (!mood) return;
     fetch(`${BASE}/api/movies?mood=${mood}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Failed to fetch movies (${res.status})`);
+        }
+        return res.json();
+      })
       .then((data) => {
         console.log("Fetched movies:", data);
         setMovies(data);
       })
-      .catch((err) => console.error("❌ Fetch error:", err));
+      .catch((err) => {
+        console.error("❌ Fetch error:", err);
+        setMovies([]); // Clear movies on error
+      });
   }, [mood, BASE]);
 
   // Filter movies

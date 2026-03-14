@@ -25,17 +25,19 @@ const FAQ = () => {
     <section className="faq-section" id="faq">
       <h2 className="faq-title">Frequently Asked Questions</h2>
       {faqs.map((faq, index) => (
-        <div key={index} className="faq-item">
-          <button 
-            className="faq-question" 
-            onClick={() => toggleFAQ(index)}
-            onKeyDown={(e) => handleKeyDown(e, index)}
-            aria-expanded={activeIndex === index}
-            aria-controls={`faq-answer-${index}`}
-          >
+        <div 
+          key={index} 
+          className="faq-item"
+          onClick={() => toggleFAQ(index)}
+          onKeyDown={(e) => handleKeyDown(e, index)}
+          tabIndex="0"
+          role="button"
+          aria-expanded={activeIndex === index}
+        >
+          <div className="faq-question">
             {faq.question}
             <span className="faq-toggle">{activeIndex === index ? "−" : "+"}</span>
-          </button>
+          </div>
           <div 
             id={`faq-answer-${index}`}
             className={`faq-answer ${activeIndex === index ? 'active' : ''}`}
