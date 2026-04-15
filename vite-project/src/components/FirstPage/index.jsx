@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
+import { BASE_URL } from '../../config/api'
 import "./index.css"
 import HappyMood from '../HappyMood'
 import SadMood from '../SadMood'
@@ -17,7 +18,7 @@ function FirstPage() {
     const [trendingMovies, setTrendingMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const BASE = import.meta.env.VITE_API_BASE || 'https://emotfix-3.onrender.com';
+    const BASE = BASE_URL;
 
     useEffect(() => {
         const storedUser = localStorage.getItem("username");
@@ -51,8 +52,8 @@ function FirstPage() {
                     console.warn("No movies fetched from backend");
                 }
             } catch (err) {
-                console.error('Error fetching movies:', err);
-                setError("Failed to load movies. Please check your connection.");
+                console.error('Error fetching movies from:', BASE, err);
+                setError(`Failed to load movies from server. Please check your connection.`);
             } finally {
                 setLoading(false);
             }

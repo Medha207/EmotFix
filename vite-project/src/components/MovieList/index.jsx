@@ -46,6 +46,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../config/api";
 import "./index.css";
 import Navbar from "../Navbar";
 
@@ -55,8 +56,7 @@ function MovieList() {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
-  // const BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
-    const BASE = import.meta.env.VITE_API_BASE || "https://emotfix-3.onrender.com";
+    const BASE = BASE_URL;
 
   useEffect(() => {
     if (!mood) return;

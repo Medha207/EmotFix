@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactPlayer from "react-player";
+import { BASE_URL } from "../../config/api";
 import "./index.css";
 import Navbar from "../Navbar";
 
@@ -14,8 +15,7 @@ export default function MovieDetails() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [isInWatchlist, setIsInWatchlist] = useState(false);
-  // const BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
-  const BASE = import.meta.env.VITE_API_BASE || "https://emotfix-3.onrender.com";
+  const BASE = BASE_URL;
 
 
   // Check authentication

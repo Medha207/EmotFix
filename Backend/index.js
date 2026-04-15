@@ -14,15 +14,25 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
+  "http://localhost:5176",
   "http://localhost:3000",
   "https://emot-fix.vercel.app"
 ];
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    // Check if origin is in the allowed list or is a Vercel subdomain
+    const isAllowed = allowedOrigins.includes(origin) || 
+                     origin.endsWith(".vercel.app") || 
+                     origin.startsWith("http://localhost:");
+    
+    if (isAllowed) {
       callback(null, true);
     } else {
+      console.error(`CORS blocked for origin: ${origin}`);
       callback(new Error("CORS not allowed"));
     }
   },
@@ -31,6 +41,18 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+// Log all requests
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
+
+// Health check route
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
+
 app.use('/api/movies', router);
 app.use('/api/users', route);
 app.use("/api/reviews", reviewrouter);
